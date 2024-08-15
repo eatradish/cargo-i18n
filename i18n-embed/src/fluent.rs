@@ -511,16 +511,18 @@ impl LanguageLoader for FluentLanguageLoader {
         if !load_language_ids.contains(&self.fallback_language) {
             load_language_ids.push(self.fallback_language.clone());
         }
-        let language_bundles: Vec<Vec<_>> = load_language_ids.iter().map(|language| {
+        let language_bundles: Vec<Vec<_>> = load_language_ids.iter().filter_map(|language| {
             let (path, files) = self.language_files(language, i18n_assets);
 
             if files.is_empty() {
                 log::debug!(target:"i18n_embed::fluent", "Unable to find language file: \"{0}\" for language: \"{1}\"", path, language);
                 if language == &self.fallback_language {
-                    return Err(I18nEmbedError::LanguageNotAvailable(path, language.clone()));
+                    return Some(Err(I18nEmbedError::LanguageNotAvailable(path, language.clone())));
                 }
+                return None;
             }
-            files.into_iter().map(|file| {
+            
+            Some(files.into_iter().map(|file| {
                 log::debug!(target:"i18n_embed::fluent", "Loaded language file: \"{0}\" for language: \"{1}\"", path, language);
 
                 let file_string = String::from_utf8(file.to_vec())
@@ -540,8 +542,10 @@ impl LanguageLoader for FluentLanguageLoader {
                 };
 
                 Ok(LanguageBundle::new(language.clone(), resource))
-            }).collect::<Result<Vec<_>, I18nEmbedError>>()
+            }).collect::<Result<Vec<_>, I18nEmbedError>>())
         }).collect::<Result<_, I18nEmbedError>>()?;
+
+        dbg!(&language_bundles);
 
         self.inner.swap(Arc::new(FluentLanguageLoaderInner {
             current_languages: CurrentLanguages {
