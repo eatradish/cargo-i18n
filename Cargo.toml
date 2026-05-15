@@ -38,12 +38,12 @@ members = [
     "i18n-config",
     "i18n-embed",
     "i18n-embed/i18n-embed-impl",
-    "i18n-embed-fl-no-check-hasmap-on-ra",
+    "i18n-embed-fl-no-check-hashmap-on-ra",
 
     # Examples
     "i18n-embed/examples/library-fluent",
     "i18n-embed/examples/desktop-bin",
-    "i18n-embed-fl-no-check-hasmap-on-ra/examples/web-server",
+    "i18n-embed-fl-no-check-hashmap-on-ra/examples/web-server",
 ]
 
 [workspace.dependencies]
@@ -52,7 +52,7 @@ i18n-build = { version = "0.10.0", path = "./i18n-build" }
 i18n-embed = { version = "0.16.0", path = "./i18n-embed" }
 i18n-embed-impl = { version = "0.8.4", path = "./i18n-embed/i18n-embed-impl" }
 i18n-config = { version = "0.4.7", path = "./i18n-config" }
-i18n-embed-fl-no-check-hasmap-on-ra = { version = "0.10.0", path = "./i18n-embed-fl-no-check-hasmap-on-ra" }
+i18n-embed-fl-no-check-hashmap-on-ra = { version = "0.10.0", path = "./i18n-embed-fl-no-check-hashmap-on-ra" }
 thiserror = "1.0"
 log = "0.4"
 unic-langid = "0.9"
