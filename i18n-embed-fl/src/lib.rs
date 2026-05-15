@@ -394,6 +394,23 @@ fn domains() -> &'static DomainsMap {
 #[proc_macro]
 #[proc_macro_error]
 pub fn fl(input: TokenStream) -> TokenStream {
+    let is_rust_analyzer = std::env::current_exe()
+        .map(|path| {
+            let name = path.to_string_lossy().to_lowercase();
+            name.contains("rust-analyzer") || name.contains("ra_proc_macro")
+        })
+        .unwrap_or(false);
+
+    if is_rust_analyzer {
+        return quote! {
+            {
+                let s: String = "RA_STUB".to_string();
+                s
+            }
+        }
+        .into();
+    }
+
     let input: FlMacroInput = parse_macro_input!(input as FlMacroInput);
 
     let fluent_loader = input.fluent_loader;
