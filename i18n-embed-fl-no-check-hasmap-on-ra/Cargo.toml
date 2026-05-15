@@ -1,5 +1,5 @@
 [package]
-name = "i18n-embed-fl"
+name = "i18n-embed-fl-no-check-hasmap-on-ra"
 description = "Macro to perform compile time checks when using the i18n-embed crate and the fluent localization system"
 categories = ["localization", "internationalization", "development-tools"]
 version = "0.10.0"

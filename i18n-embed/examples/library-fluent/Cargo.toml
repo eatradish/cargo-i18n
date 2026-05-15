@@ -8,6 +8,6 @@ edition = "2018"
 
 [dependencies]
 i18n-embed = { workspace = true, features = ["fluent-system", "autoreload"] }
-i18n-embed-fl = { workspace = true }
+i18n-embed-fl-no-check-hasmap-on-ra = { workspace = true }
 once_cell = { workspace = true }
 rust-embed = { workspace = true }
