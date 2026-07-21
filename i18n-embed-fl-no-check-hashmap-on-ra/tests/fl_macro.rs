@@ -2,7 +2,7 @@ use i18n_embed::{
     fluent::{fluent_language_loader, FluentLanguageLoader},
     LanguageLoader,
 };
-use i18n_embed_fl::fl;
+use i18n_embed_fl_no_check_hashmap_on_ra::fl;
 use rust_embed::RustEmbed;
 use std::collections::HashMap;
 
